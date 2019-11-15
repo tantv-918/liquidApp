@@ -21,27 +21,27 @@ CONTRACT_START()
 			long int score;
 			bool flag_continue;
 			bool flag_endgame;
-		}
+		};
 
-		struct [[eosio::table]] user_info    {
+		struct [[eosio::table]] user_info  {
 			name username;
-			game currently_game;
+			game current_game;
 			game best_score_game;
 
 			auto primary_key() const { return username.value; }
-		}
+		};
 
 		struct rank {
 			name username;
 			long int score;
-		}
+		};
 
 		struct [[eosio::table]] charts {
 			std::string date;
 			rank top[100];
 
-			auto primary_key() const { return date; }
-		}
+			auto primary_key() const { return date.value; }
+		};
 
 		typedef dapp::multi_index<name("users"), user_info> users_table;
 		typedef eosio::multi_index<".users"_n, user_info> users_table_v_abi;
@@ -49,7 +49,7 @@ CONTRACT_START()
 			std::vector<char> shard_uri;
 			uint64_t shard;
 			uint64_t primary_key() const {return shard;}
-		}
+		};
 
 		typedef eosio::multi_index<"users"_n, shardbucket> users_table_abi;
 
@@ -63,15 +63,18 @@ CONTRACT_START()
 			_users(receiver, receiver.value){}
 
 		[[eosio::action]]
-		void login(name username)
+		void login(name username);
 
 		[[eosio::action]]
-		void startgame(name username)
+		void startgame(name username);
+
+		// [[eosio::action]]
+		// void continuegame(name username);
 
 		[[eosio::action]]
-		void savegame(name username, int state[][], int score)
+		void savegame(name username, int state[][], long int score);
 
 		[[eosio::action]]
-		void endgame(name username, int state[][], int score)
+		void endgame(name username, int state[][], long int score, std::string date);
 
-CONTRACT_END(login)(startgame)(savegame)(endgame))
+CONTRACT_END(login)(startgame)(savegame)(continuegame)(endgame))
