@@ -22,7 +22,9 @@ models/boxmaps/50-zeusrepoeos.json
 contracts/eos/compile_commands.json
 contracts/eos/*service/*service.cpp
 
-
+contracts/eos/*/CMakeCache.txt
+contracts/eos/*/*/CMakeCache.txt
+contracts/eos/*/tmp/*-cfgcmd.txt
 
 
 models/.placeholder

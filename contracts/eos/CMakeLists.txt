@@ -261,6 +261,36 @@ ExternalProject_Add(
             )
 
 
+# building:mycontract
+
+ExternalProject_Add(
+   mycontract
+   SOURCE_DIR mycontract
+   BINARY_DIR mycontract
+   CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${EOSIO_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake
+   UPDATE_COMMAND ""
+   PATCH_COMMAND ""
+   TEST_COMMAND ""
+   INSTALL_COMMAND ""
+   BUILD_ALWAYS 1
+)
+
+
+# building:testcntrt
+
+ExternalProject_Add(
+   testcntrt
+   SOURCE_DIR testcntrt
+   BINARY_DIR testcntrt
+   CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${EOSIO_CDT_ROOT}/lib/cmake/eosio.cdt/EosioWasmToolchain.cmake
+   UPDATE_COMMAND ""
+   PATCH_COMMAND ""
+   TEST_COMMAND ""
+   INSTALL_COMMAND ""
+   BUILD_ALWAYS 1
+)
+
+
 # building:tzfe
 
 ExternalProject_Add(
