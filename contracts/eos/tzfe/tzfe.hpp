@@ -100,8 +100,13 @@ CONTRACT_START()
 		[[eosio::action]]
 		void savegame(user_struct payload);
 
-		[[eosio::action]]
-		void endgame(user_struct payload);
+		// [[eosio::action]]
+		// void endgame(user_struct payload);
 
-  VACCOUNTS_APPLY(((login_struct)(login))((user_struct)(startgame))((user_struct)(endgame))((user_struct)(savegame))((user_struct)(continuegame)))
+    [[eosio::action]]
+    void endgame(name vaccount, long int score);
+
+    // VACCOUNTS_APPLY(((login_struct)(login))((user_struct)(startgame))((user_struct)(endgame))((user_struct)(savegame))((user_struct)(continuegame)))
+    VACCOUNTS_APPLY(((login_struct)(login))((user_struct)(startgame))((user_struct)(savegame))((user_struct)(continuegame)))
+
 CONTRACT_END((login)(startgame)(savegame)(endgame)(xdcommit)(regaccount))

@@ -38,24 +38,36 @@ void tzfe::savegame(user_struct payload){
   });
 }
 
-void tzfe::endgame(user_struct payload){
-  auto vaccount = payload.vaccount;
+// void tzfe::endgame(user_struct payload){
+//   auto vaccount = payload.vaccount;
+//   require_auth(vaccount);
+
+//   auto& user = _users.get(vaccount.value, "User doesn't exist.");
+
+//   _users.modify(user, vaccount, [&](auto &modified_user) {
+
+//     if(payload.game_data.flag_continue == false){
+//       modified_user.current_game = payload.game_data;
+//     }
+
+//     if (payload.game_data.score > modified_user.best_score_game.score)
+//     {
+//       modified_user.best_score_game = payload.game_data;
+
+//       sort_rank(payload.date, payload.vaccount, payload.game_data.score);
+//     }
+//   });
+// }
+
+void tzfe::endgame(name vaccount, long int score){
   require_auth(vaccount);
 
-  auto& user = _users.get(vaccount.value, "User doesn't exist.");
+   auto& user = _users.get(vaccount.value, "User doesn't exist.");
 
   _users.modify(user, vaccount, [&](auto &modified_user) {
-
-    if(payload.game_data.flag_continue == false){
-      modified_user.current_game = payload.game_data;
-    }
-
-    if (payload.game_data.score > modified_user.best_score_game.score)
-    {
-      modified_user.best_score_game = payload.game_data;
-
-      sort_rank(payload.date, payload.vaccount, payload.game_data.score);
-    }
+    gameState game_data;
+    game_data.score = score;
+    modified_user.current_game = game_data;
   });
 }
 
